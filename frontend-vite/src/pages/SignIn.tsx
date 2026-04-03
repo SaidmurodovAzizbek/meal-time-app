@@ -174,7 +174,7 @@ export default function SignIn() {
   useEffect(() => {
     const token = localStorage.getItem("token")
     if (token) {
-      navigate("/welcome")
+      navigate("/home")
       return
     }
     setMounted(true)
@@ -207,7 +207,7 @@ export default function SignIn() {
 
     if (phone === "+998901234567" && password === "password123") {
       localStorage.setItem("token", "meal-time-auth-token")
-      navigate("/welcome")
+      navigate("/home")
     } else {
       setGeneralError("Telefon raqam yoki parol noto'g'ri!")
       setIsLoading(false)
