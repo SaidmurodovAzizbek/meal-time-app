@@ -276,7 +276,7 @@ export default function SignIn() {
       <div style={{
         position: "relative",
         width: "100%",
-        maxWidth: "420px",
+        maxWidth: "640px",
         zIndex: 1,
       }}>
         {/* ─── Brand Header ─── */}

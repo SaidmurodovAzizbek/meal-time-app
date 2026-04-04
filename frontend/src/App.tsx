@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import Landing from "./pages/Landing"
 import SignIn from "./pages/SignIn"
 import Home from "./pages/Home"
 
@@ -6,7 +7,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/home" element={<Home />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
