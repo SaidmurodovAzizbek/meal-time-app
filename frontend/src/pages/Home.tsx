@@ -13,16 +13,56 @@ const categories = [
 ]
 
 const meals = [
-  { id: 1, name: "Osh (Palov)", price: 32000, calories: 540, category: "tushlik", rating: 4.8, time: "30-40 min", image: "🍚" },
-  { id: 2, name: "Qaymoqli sho'rva", price: 22000, calories: 320, category: "tushlik", rating: 4.6, time: "20-30 min", image: "🍲" },
-  { id: 3, name: "Tuxum va non", price: 15000, calories: 280, category: "nonushta", rating: 4.5, time: "10-15 min", image: "🍳" },
-  { id: 4, name: "Suli bo'tqasi", price: 18000, calories: 220, category: "nonushta", rating: 4.3, time: "15-20 min", image: "🥣" },
-  { id: 5, name: "Meva salati", price: 25000, calories: 180, category: "kechki", rating: 4.9, time: "10 min", image: "🥗" },
-  { id: 6, name: "Grillangan tovuq", price: 38000, calories: 420, category: "kechki", rating: 4.7, time: "25-35 min", image: "🍗" },
-  { id: 7, name: "Yashil smoothie", price: 20000, calories: 150, category: "ichimlik", rating: 4.8, time: "5 min", image: "🥤" },
-  { id: 8, name: "Limonad", price: 12000, calories: 90, category: "ichimlik", rating: 4.4, time: "3 min", image: "🍋" },
-  { id: 9, name: "Lag'mon", price: 28000, calories: 480, category: "tushlik", rating: 4.7, time: "25-35 min", image: "🍜" },
-  { id: 10, name: "Qovoqli tortilla", price: 24000, calories: 350, category: "kechki", rating: 4.5, time: "20 min", image: "🌮" },
+  {
+    id: 1, name: "Osh (Palov)", price: 32000, calories: 540, category: "tushlik", rating: 4.8, time: "30-40 min", image: "🍚",
+    fats: 25, proteins: 18, carbs: 60, ingredients: ["Guruch", "Go'sht", "Sabzi", "Piyoz", "Yog'"],
+    description: "An'anaviy o'zbek milliy taomi. Asosiy tarkibi darchin va zira bilan to'ldirilgan beqiyos maza."
+  },
+  {
+    id: 2, name: "Qaymoqli sho'rva", price: 22000, calories: 320, category: "tushlik", rating: 4.6, time: "20-30 min", image: "🍲",
+    fats: 15, proteins: 12, carbs: 20, ingredients: ["Qaymoq", "Tovuq go'shti", "Qo'ziqorin", "Ko'katlar"],
+    description: "Yengil va mazali qaymoqli sho'rva. Ayniqsa sovuq kunlarda isinish uchun juda mos."
+  },
+  {
+    id: 3, name: "Tuxum va non", price: 15000, calories: 280, category: "nonushta", rating: 4.5, time: "10-15 min", image: "🍳",
+    fats: 18, proteins: 16, carbs: 25, ingredients: ["Tuxum", "Non", "Sariyog'", "Pishloq"],
+    description: "Erta tongdan kuchli energiya beruvchi oson va tez tayyorlanadigan nonushta."
+  },
+  {
+    id: 4, name: "Suli bo'tqasi", price: 18000, calories: 220, category: "nonushta", rating: 4.3, time: "15-20 min", image: "🥣",
+    fats: 6, proteins: 8, carbs: 40, ingredients: ["Suli yormasi", "Sut", "Asal", "Yong'oq", "Mevalar"],
+    description: "Sog'lom va to'yimli nonushta. Sutda pishirilgan toza suli bo'tqasi rezavorlar bilan."
+  },
+  {
+    id: 5, name: "Meva salati", price: 25000, calories: 180, category: "kechki", rating: 4.9, time: "10 min", image: "🥗",
+    fats: 2, proteins: 3, carbs: 35, ingredients: ["Olma", "Banan", "Kivi", "Qulupnay", "Asal", "Yalpiz"],
+    description: "Tabiiy vitaminlarga boy, shirin mevalarning ajoyib uyg'unlashgan to'plami."
+  },
+  {
+    id: 6, name: "Grillangan tovuq", price: 38000, calories: 420, category: "kechki", rating: 4.7, time: "25-35 min", image: "🍗",
+    fats: 22, proteins: 45, carbs: 5, ingredients: ["Tovuq felesi", "Ziravorlar", "Limon", "Zaytun yog'i"],
+    description: "Oqsillarga boy maxsus pishirilgan tovuq felesi. Sportchilar va dietadagilar uchun tavsiya etiladi."
+  },
+  {
+    id: 7, name: "Yashil smoothie", price: 20000, calories: 150, category: "ichimlik", rating: 4.8, time: "5 min", image: "🥤",
+    fats: 1, proteins: 4, carbs: 28, ingredients: ["Ismaloq", "Olma", "Apelsin", "Zanjabil", "Kivi"],
+    description: "Organizm uchun ajoyib detoks ta'sirga ega, quvvat beruvchi vitaminli smuzis."
+  },
+  {
+    id: 8, name: "Limonad", price: 12000, calories: 90, category: "ichimlik", rating: 4.4, time: "3 min", image: "🍋",
+    fats: 0, proteins: 0, carbs: 22, ingredients: ["Limon xaroti", "Yalpiz", "Muz", "Shakar qiyomi"],
+    description: "Chanqoqni bosuvchi maxsus yangi siqilgan limon sharbati yalpiz barglari bn."
+  },
+  {
+    id: 9, name: "Lag'mon", price: 28000, calories: 480, category: "tushlik", rating: 4.7, time: "25-35 min", image: "🍜",
+    fats: 20, proteins: 15, carbs: 55, ingredients: ["Xamir", "Go'sht", "Sabzavotlar", "Xitoy karami"],
+    description: "Milliy uyg'ur uslubida pishirilgan maxsus cho'zma lag'mon sous bilan birlashgan."
+  },
+  {
+    id: 10, name: "Qovoqli tortilla", price: 24000, calories: 350, category: "kechki", rating: 4.5, time: "20 min", image: "🌮",
+    fats: 12, proteins: 10, carbs: 45, ingredients: ["Qovoq", "Tortilla", "Pishloq", "Ziravorlar"],
+    description: "Qovoq asosli yengil ishtahaochar maza va chiroyli kechki ovqat opsiyasi."
+  },
 ]
 
 /* ═══════════════════════════════════════════
@@ -30,15 +70,15 @@ const meals = [
    ═══════════════════════════════════════════ */
 const MenuIcon = ({ active }: { active: boolean }) => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#16a34a" : "#94a3b8"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 6h18M3 12h18M3 18h18"/>
+    <path d="M3 6h18M3 12h18M3 18h18" />
   </svg>
 )
 
 const CartIcon = ({ active, count }: { active: boolean; count: number }) => (
   <div style={{ position: "relative" }}>
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#16a34a" : "#94a3b8"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
     </svg>
     {count > 0 && (
       <span style={{
@@ -55,62 +95,62 @@ const CartIcon = ({ active, count }: { active: boolean; count: number }) => (
 
 const ProfileIcon = ({ active }: { active: boolean }) => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={active ? "#16a34a" : "#94a3b8"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-    <circle cx="12" cy="7" r="4"/>
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
   </svg>
 )
 
 const StarIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" strokeWidth="1">
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
   </svg>
 )
 
 const ClockIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+    <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
   </svg>
 )
 
 const FireIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
   </svg>
 )
 
 const BellIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" />
   </svg>
 )
 
 const SearchIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 )
 
 const PlusIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+    <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
   </svg>
 )
 
 const MinusIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="5" y1="12" x2="19" y2="12"/>
+    <line x1="5" y1="12" x2="19" y2="12" />
   </svg>
 )
 
 const LogOutIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
   </svg>
 )
 
 const ChevronRightIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="9 18 15 12 9 6"/>
+    <polyline points="9 18 15 12 9 6" />
   </svg>
 )
 
@@ -127,6 +167,7 @@ function formatPrice(n: number) {
 function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
   const [activeCategory, setActiveCategory] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
+  const [selectedMeal, setSelectedMeal] = useState<typeof meals[0] | null>(null)
 
   const filtered = meals.filter((m) => {
     const matchCat = activeCategory === "all" || m.category === activeCategory
@@ -163,11 +204,11 @@ function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
             transition: "all 0.2s ease",
             boxShadow: "0 4px 16px rgba(0,0,0,0.05)",
           }}
-          onFocus={(e) => { 
+          onFocus={(e) => {
             e.target.style.borderColor = "rgba(22,163,74,0.4)"
             e.target.style.background = "rgba(255,255,255,0.95)"
           }}
-          onBlur={(e) => { 
+          onBlur={(e) => {
             e.target.style.borderColor = "rgba(22,163,74,0.15)"
             e.target.style.background = "rgba(255,255,255,0.7)"
           }}
@@ -212,8 +253,9 @@ function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
         {filtered.map((meal) => (
           <div
             key={meal.id}
+            onClick={() => setSelectedMeal(meal)}
             style={{
-              background: "white",
+              background: "#fcfbfa",
               borderRadius: "24px",
               padding: "20px",
               boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
@@ -323,6 +365,111 @@ function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
           </p>
         </div>
       )}
+
+      {/* Modal */}
+      {selectedMeal && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 100,
+          background: "rgba(15, 38, 24, 0.4)", backdropFilter: "blur(8px)",
+          display: "flex", alignItems: "center", justifyContent: "center", padding: "20px",
+          animation: "fade-in 0.2s ease",
+        }} onClick={() => setSelectedMeal(null)}>
+          <div style={{
+            background: "#fff", borderRadius: "32px", padding: "24px",
+            width: "100%", maxWidth: "420px", maxHeight: "90vh", overflowY: "auto",
+            boxShadow: "0 24px 64px rgba(0,0,0,0.2)",
+            animation: "slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+            position: "relative",
+          }} onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setSelectedMeal(null)}
+              style={{
+                position: "absolute", top: "16px", right: "16px",
+                width: "36px", height: "36px", borderRadius: "12px",
+                background: "rgba(0,0,0,0.05)", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "#1a3a2a", transition: "background 0.2s", zIndex: 2
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = "rgba(0,0,0,0.1)"}
+              onMouseOut={(e) => e.currentTarget.style.background = "rgba(0,0,0,0.05)"}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+            </button>
+
+            <div style={{
+              textAlign: "center"
+            }}>
+              <div style={{
+                width: "100px", height: "100px", borderRadius: "24px", margin: "0 auto 20px",
+                background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+                display: "flex", alignItems: "center", justifyContent: "center", fontSize: "56px",
+                boxShadow: "0 8px 24px rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.2)",
+              }}>
+                {selectedMeal.image}
+              </div>
+
+              <h2 style={{ fontSize: "24px", fontWeight: 800, color: "#0f2618", textAlign: "center", marginBottom: "8px" }}>
+                {selectedMeal.name}
+              </h2>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+                <span style={{ fontSize: "14px", fontWeight: 700, color: "#fbbf24", display: "flex", alignItems: "center", gap: "4px" }}><StarIcon /> {selectedMeal.rating} ({(selectedMeal.id * 123) % 400 + 40} baho)</span>
+                <span style={{ opacity: 0.3 }}>•</span>
+                <span style={{ fontSize: "14px", fontWeight: 600, color: "#6b8f7b", display: "flex", alignItems: "center", gap: "4px" }}><ClockIcon /> {selectedMeal.time}</span>
+              </div>
+
+              <p style={{ fontSize: "14px", color: "#4b6b55", textAlign: "center", lineHeight: 1.5, marginBottom: "24px" }}>
+                {selectedMeal.description}
+              </p>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "space-between", gap: "8px", marginBottom: "24px" }}>
+              {[
+                { label: "Kaloriya", val: selectedMeal.calories, unit: "kcal" },
+                { label: "Oqsillar", val: selectedMeal.proteins, unit: "g" },
+                { label: "Yog'lar", val: selectedMeal.fats, unit: "g" },
+                { label: "Uglevod", val: selectedMeal.carbs, unit: "g" },
+              ].map(mac => (
+                <div key={mac.label} style={{ textAlign: "center", flex: 1, background: "rgba(34,197,94,0.05)", borderRadius: "16px", padding: "10px 4px" }}>
+                  <p style={{ fontSize: "14px", fontWeight: 800, color: "#16a34a" }}>{mac.val}<span style={{ fontSize: "10px", marginLeft: "2px" }}>{mac.unit}</span></p>
+                  <p style={{ fontSize: "11px", fontWeight: 600, color: "#6b8f7b", marginTop: "2px" }}>{mac.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ marginBottom: "24px" }}>
+              <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#0f2618", marginBottom: "12px" }}>Tarkibidagi masalliqlar:</h3>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                {selectedMeal.ingredients?.map(ing => (
+                  <span key={ing} style={{ background: "#f3f4f6", padding: "6px 14px", borderRadius: "100px", fontSize: "13px", fontWeight: 600, color: "#4b5563" }}>
+                    {ing}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(0,0,0,0.05)", paddingTop: "20px" }}>
+              <div>
+                <p style={{ fontSize: "12px", color: "#6b8f7b", fontWeight: 600, marginBottom: "2px" }}>Umumiy narx</p>
+                <span style={{ fontSize: "22px", fontWeight: 800, color: "#0f2618" }}>
+                  {formatPrice(selectedMeal.price)}
+                </span>
+              </div>
+              <button
+                onClick={() => { onAddToCart(selectedMeal.id); setSelectedMeal(null) }}
+                style={{
+                  background: "#16a34a", color: "white", border: "none", padding: "14px 24px",
+                  borderRadius: "16px", fontSize: "14px", fontWeight: 800, cursor: "pointer",
+                  boxShadow: "0 8px 24px rgba(22,163,74,0.25)", transition: "transform 0.15s"
+                }}
+                onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+              >
+                Savatga qo'shish
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -372,7 +519,7 @@ function CartTab({ cart, onRemove, onClear }: {
     <div>
       {/* Cart items */}
       <h2 style={{ fontSize: "22px", fontWeight: 800, color: "#1a3a2a", marginBottom: "20px", letterSpacing: "-0.02em" }}>Sizning buyurtmangiz</h2>
-      
+
       <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
         {cartItems.map((item) => (
           <div key={item.id} style={{
@@ -441,7 +588,7 @@ function CartTab({ cart, onRemove, onClear }: {
           <span style={{ fontSize: "14px", fontWeight: 600, color: "#6b8f7b" }}>Yetkazib berish:</span>
           <span style={{ fontSize: "14px", fontWeight: 700, color: "#1a3a2a" }}>{formatPrice(10000)}</span>
         </div>
-        
+
         <div style={{
           display: "flex", justifyContent: "space-between",
           alignItems: "center", marginBottom: "24px",
@@ -459,14 +606,14 @@ function CartTab({ cart, onRemove, onClear }: {
           display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
           transition: "transform 0.2s ease, box-shadow 0.2s ease",
         }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.transform = "translateY(-2px)"
-          e.currentTarget.style.boxShadow = "0 16px 40px rgba(22,163,74,0.4)"
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.transform = "none"
-          e.currentTarget.style.boxShadow = "0 12px 32px rgba(22,163,74,0.3)"
-        }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px)"
+            e.currentTarget.style.boxShadow = "0 16px 40px rgba(22,163,74,0.4)"
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = "none"
+            e.currentTarget.style.boxShadow = "0 12px 32px rgba(22,163,74,0.3)"
+          }}
         >
           Buyurtma berish 🚀
         </button>
@@ -493,12 +640,13 @@ function CartTab({ cart, onRemove, onClear }: {
 /* ═══════════════════════════════════════════
    PROFILE TAB
    ═══════════════════════════════════════════ */
-function ProfileTab({ onLogout }: { onLogout: () => void }) {
+function ProfileTab({ onLogout, navigate }: { onLogout: () => void, navigate: any }) {
   const menuItems = [
-    { icon: "👤", label: "Shaxsiy ma'lumotlar", color: "#16a34a" },
-    { icon: "⚙️", label: "Sozlamalar", color: "#818cf8" },
-    { icon: "🛡️", label: "Maxfiylik", color: "#16a34a" },
-    { icon: "ℹ️", label: "Ilova haqida", color: "#38bdf8" },
+    { icon: "👤", label: "Shaxsiy ma'lumotlar", color: "#16a34a", path: "/profile/info" },
+    { icon: "📜", label: "Buyurtmalar tarixi", color: "#f59e0b", path: "/profile/history" },
+    { icon: "⚙️", label: "Sozlamalar", color: "#818cf8", path: "/profile/settings" },
+    { icon: "🛡️", label: "Maxfiylik", color: "#16a34a", path: "/profile/privacy" },
+    { icon: "ℹ️", label: "Ilova haqida", color: "#38bdf8", path: "/profile/about" },
   ]
 
   const topMeals = meals.slice(0, 5)
@@ -516,7 +664,26 @@ function ProfileTab({ onLogout }: { onLogout: () => void }) {
           boxShadow: "0 12px 32px rgba(34,197,94,0.06)",
           textAlign: "center",
           border: "1px solid rgba(255,255,255,1)",
+          position: "relative",
         }}>
+          {/* Tarif Reja - Top Right */}
+          <div style={{
+            position: "absolute",
+            top: "16px", right: "16px",
+            background: "rgba(34,197,94,0.1)",
+            padding: "6px 12px",
+            borderRadius: "12px",
+            fontSize: "12px",
+            fontWeight: 700,
+            color: "#0f2618",
+            display: "flex",
+            alignItems: "center",
+            gap: "4px",
+            border: "1px solid rgba(34,197,94,0.2)"
+          }}>
+            Oddiy 🌱
+          </div>
+
           {/* Avatar */}
           <div style={{
             width: "90px", height: "90px", borderRadius: "28px",
@@ -529,64 +696,13 @@ function ProfileTab({ onLogout }: { onLogout: () => void }) {
           }}>
             👨🏻‍💻
           </div>
-          
+
           <h3 style={{ fontSize: "22px", fontWeight: 800, color: "#1a3a2a", marginBottom: "6px", letterSpacing: "-0.01em" }}>
             Foydalanuvchi
           </h3>
-          <p style={{ fontSize: "14px", color: "#6b8f7b", fontWeight: 600, marginBottom: "20px" }}>
+          <p style={{ fontSize: "14px", color: "#6b8f7b", fontWeight: 600 }}>
             +998 90 *** ** 67
           </p>
-
-          {/* Tarif Reja */}
-          <div style={{
-            background: "rgba(34,197,94,0.05)",
-            borderRadius: "18px",
-            padding: "18px",
-            border: "1px solid rgba(34,197,94,0.15)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "24px",
-          }}>
-            <div style={{ textAlign: "left" }}>
-              <p style={{ fontSize: "12px", fontWeight: 700, color: "#6b8f7b", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>
-                Hozirgi tarif
-              </p>
-              <p style={{ fontSize: "18px", fontWeight: 800, color: "#0f2618", display: "flex", alignItems: "center", gap: "6px" }}>
-                Oddiy <span style={{ fontSize: "18px" }}>🌱</span>
-              </p>
-            </div>
-            <button style={{
-              background: "#16a34a", color: "white", border: "none",
-              padding: "10px 18px", borderRadius: "12px", fontSize: "13px",
-              fontWeight: 800, cursor: "pointer", boxShadow: "0 4px 16px rgba(22,163,74,0.3)",
-              fontFamily: "inherit", transition: "transform 0.15s",
-            }}
-            onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-            onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-            >
-              Premium ✨
-            </button>
-          </div>
-
-          {/* Stats */}
-          <div style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "12px", padding: "16px", borderRadius: "20px",
-            background: "rgba(255,255,255,0.7)", border: "1px solid rgba(255,255,255,1)",
-            boxShadow: "0 4px 16px rgba(34,197,94,0.05)",
-          }}>
-            {[
-              { label: "Buyurtmalar", value: "12" },
-              { label: "Sevimli", value: "5" },
-              { label: "Ball", value: "240" },
-            ].map((s) => (
-              <div key={s.label}>
-                <p style={{ fontSize: "22px", fontWeight: 800, color: "#16a34a", textShadow: "0 2px 4px rgba(34,197,94,0.1)" }}>{s.value}</p>
-                <p style={{ fontSize: "12px", fontWeight: 700, color: "#6b8f7b", marginTop: "2px" }}>{s.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Menu items */}
@@ -598,6 +714,7 @@ function ProfileTab({ onLogout }: { onLogout: () => void }) {
           {menuItems.map((item, i) => (
             <button
               key={item.label}
+              onClick={() => navigate(item.path)}
               style={{
                 width: "100%", display: "flex", alignItems: "center", gap: "16px",
                 padding: "20px 24px", background: "transparent", border: "none",
@@ -669,20 +786,20 @@ function ProfileTab({ onLogout }: { onLogout: () => void }) {
           {topMeals.map((meal, index) => (
             <div key={meal.id} style={{
               display: "flex", alignItems: "center", gap: "16px", padding: "16px",
-              background: "rgba(255,255,255,0.9)", borderRadius: "20px", 
+              background: "rgba(255,255,255,0.9)", borderRadius: "20px",
               border: "1px solid rgba(255,255,255,1)", transition: "transform 0.2s ease, box-shadow 0.2s ease", cursor: "pointer",
               boxShadow: "0 4px 16px rgba(34,197,94,0.04)",
             }}
-            onMouseOver={(e) => {
-               e.currentTarget.style.transform = "translateY(-2px)"
-               e.currentTarget.style.boxShadow = "0 8px 24px rgba(34,197,94,0.08)"
-            }}
-            onMouseOut={(e) => {
-               e.currentTarget.style.transform = "none"
-               e.currentTarget.style.boxShadow = "0 4px 16px rgba(34,197,94,0.04)"
-            }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)"
+                e.currentTarget.style.boxShadow = "0 8px 24px rgba(34,197,94,0.08)"
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = "none"
+                e.currentTarget.style.boxShadow = "0 4px 16px rgba(34,197,94,0.04)"
+              }}
             >
-              <div style={{ fontSize: "32px", width: "56px", height: "56px", background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)", borderRadius: "16px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", border: "1px solid rgba(34,197,94,0.2)"}}>
+              <div style={{ fontSize: "32px", width: "56px", height: "56px", background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)", borderRadius: "16px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", border: "1px solid rgba(34,197,94,0.2)" }}>
                 {meal.image}
                 <div style={{ position: "absolute", top: "-6px", left: "-6px", width: "24px", height: "24px", borderRadius: "50%", background: "#16a34a", color: "white", fontSize: "12px", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid #ffffff", boxShadow: "0 2px 8px rgba(22,163,74,0.3)" }}>
                   {index + 1}
@@ -783,7 +900,7 @@ export default function Home() {
 
       {/* ─── Header ─── */}
       <header style={{
-        background: "#0f2618",
+        background: "#27bf61ff",
         padding: "16px 20px",
         borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
         position: "sticky",
@@ -807,8 +924,8 @@ export default function Home() {
               boxShadow: "0 4px 12px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.1)",
             }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/>
-                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z" />
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
               </svg>
             </div>
             <div>
@@ -825,12 +942,12 @@ export default function Home() {
             transition: "all 0.15s ease",
             boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.15)"
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.background = "rgba(255,255,255,0.1)"
-          }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.15)"
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.background = "rgba(255,255,255,0.1)"
+            }}
           >
             <BellIcon />
             <span style={{
@@ -854,7 +971,7 @@ export default function Home() {
       }}>
         {activeTab === "menu" && <MenuTab onAddToCart={handleAddToCart} />}
         {activeTab === "cart" && <CartTab cart={cart} onRemove={handleRemoveFromCart} onClear={handleClearCart} />}
-        {activeTab === "profile" && <ProfileTab onLogout={handleLogout} />}
+        {activeTab === "profile" && <ProfileTab onLogout={() => navigate("/")} navigate={navigate} />}
       </main>
 
       {/* ─── Bottom Tab Bar ─── */}

@@ -223,7 +223,7 @@ export default function SignIn() {
       alignItems: "center",
       justifyContent: "center",
       padding: "24px",
-      background: "linear-gradient(160deg, #f0fdf4 0%, #bbf7d0 50%, #8dd8b4 100%)",
+      background: "linear-gradient(160deg, #e3f5ec 0%, #bce9d2 100%)",
       position: "relative",
       overflow: "hidden",
     }}>
@@ -352,7 +352,7 @@ export default function SignIn() {
 
         {/* ─── Form Card ─── */}
         <div style={{
-          background: "white",
+          background: "#fcfbfa",
           borderRadius: "24px",
           padding: "36px 32px",
           boxShadow: "0 25px 60px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.15)",

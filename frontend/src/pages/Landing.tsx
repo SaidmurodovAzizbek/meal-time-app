@@ -14,7 +14,7 @@ export default function Landing() {
       alignItems: "center",
       justifyContent: "center",
       padding: "24px",
-      background: "linear-gradient(160deg, #f0fdf4 0%, #bbf7d0 50%, #8dd8b4 100%)",
+      background: "linear-gradient(160deg, #e3f5ec 0%, #bce9d2 100%)",
       position: "relative",
       overflow: "hidden",
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
