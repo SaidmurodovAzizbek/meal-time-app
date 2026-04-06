@@ -223,7 +223,7 @@ export default function SignIn() {
       alignItems: "center",
       justifyContent: "center",
       padding: "24px",
-      background: "linear-gradient(160deg, #0f2618 0%, #14432a 25%, #166534 50%, #1a7a40 75%, #1e8a48 100%)",
+      background: "linear-gradient(160deg, #f0fdf4 0%, #bbf7d0 50%, #8dd8b4 100%)",
       position: "relative",
       overflow: "hidden",
     }}>
@@ -265,10 +265,10 @@ export default function SignIn() {
       <div style={{
         position: "absolute",
         inset: 0,
-        opacity: 0.04,
+        opacity: 0.4,
         backgroundImage: `
-          linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
+          linear-gradient(rgba(34,197,94,0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(34,197,94,0.06) 1px, transparent 1px)
         `,
         backgroundSize: "50px 50px",
       }} />
@@ -276,7 +276,7 @@ export default function SignIn() {
       <div style={{
         position: "relative",
         width: "100%",
-        maxWidth: "640px",
+        maxWidth: "400px",
         zIndex: 1,
       }}>
         {/* ─── Brand Header ─── */}
@@ -300,12 +300,12 @@ export default function SignIn() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.08) 100%)",
-                border: "1px solid rgba(255,255,255,0.25)",
+                background: "linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%)",
+                border: "1px solid rgba(34,197,94,0.2)",
                 backdropFilter: "blur(12px)",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.2)",
+                boxShadow: "0 12px 32px rgba(34,197,94,0.1), inset 0 2px 4px rgba(255,255,255,0.8)",
               }}>
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/>
                   <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                 </svg>
@@ -335,7 +335,7 @@ export default function SignIn() {
           <h1 style={{
             fontSize: "32px",
             fontWeight: 800,
-            color: "white",
+            color: "#0f2618",
             letterSpacing: "-0.03em",
             marginBottom: "6px",
           }}>
@@ -343,8 +343,8 @@ export default function SignIn() {
           </h1>
           <p style={{
             fontSize: "14px",
-            color: "rgba(187, 247, 208, 0.7)",
-            fontWeight: 400,
+            color: "#4b6b55",
+            fontWeight: 500,
           }}>
             Sog'lom ovqatlanish — yangi hayot tarzi
           </p>
@@ -572,8 +572,9 @@ export default function SignIn() {
         <p style={{
           textAlign: "center",
           fontSize: "11px",
-          color: "rgba(187, 247, 208, 0.4)",
+          color: "#94a3b8",
           marginTop: "28px",
+          fontWeight: 500,
           animation: "fade-in 0.5s ease 0.6s both",
         }}>
           © 2025 Meal Time. Barcha huquqlar himoyalangan.

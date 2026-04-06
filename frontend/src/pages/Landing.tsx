@@ -14,7 +14,7 @@ export default function Landing() {
       alignItems: "center",
       justifyContent: "center",
       padding: "24px",
-      background: "linear-gradient(160deg, #0f2618 0%, #14432a 25%, #166534 50%, #1a7a40 75%, #1e8a48 100%)",
+      background: "linear-gradient(160deg, #f0fdf4 0%, #bbf7d0 50%, #8dd8b4 100%)",
       position: "relative",
       overflow: "hidden",
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
@@ -59,10 +59,10 @@ export default function Landing() {
       <div style={{
         position: "absolute",
         inset: 0,
-        opacity: 0.04,
+        opacity: 0.4,
         backgroundImage: `
-          linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
+          linear-gradient(rgba(34,197,94,0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(34,197,94,0.06) 1px, transparent 1px)
         `,
         backgroundSize: "50px 50px",
       }} />
@@ -91,12 +91,12 @@ export default function Landing() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 100%)",
-              border: "1px solid rgba(255,255,255,0.25)",
+              background: "linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%)",
+              border: "1px solid rgba(34,197,94,0.2)",
               backdropFilter: "blur(16px)",
-              boxShadow: "0 12px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3)",
+              boxShadow: "0 16px 40px rgba(34,197,94,0.1), inset 0 2px 4px rgba(255,255,255,0.8)",
             }}>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/>
                 <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
               </svg>
@@ -125,7 +125,7 @@ export default function Landing() {
           <h1 style={{
             fontSize: "44px",
             fontWeight: 900,
-            color: "white",
+            color: "#0f2618",
             letterSpacing: "-0.04em",
             marginBottom: "12px",
             lineHeight: 1.1,
@@ -135,7 +135,7 @@ export default function Landing() {
           <p style={{
             fontSize: "16px",
             fontWeight: 500,
-            color: "rgba(255, 255, 255, 0.8)",
+            color: "#4b6b55",
             lineHeight: 1.6,
             maxWidth: "320px",
             margin: "0 auto",
@@ -158,17 +158,18 @@ export default function Landing() {
             { icon: "💪", text: "Sog'lom" }
           ].map(f => (
             <div key={f.text} style={{
-              background: "rgba(255,255,255,0.1)",
-              border: "1px solid rgba(255,255,255,0.15)",
+              background: "rgba(255,255,255,0.6)",
+              border: "1px solid rgba(34,197,94,0.1)",
               padding: "10px 16px",
               borderRadius: "16px",
               backdropFilter: "blur(8px)",
               display: "flex",
               alignItems: "center",
               gap: "6px",
-              color: "white",
+              color: "#1a3a2a",
               fontSize: "13px",
-              fontWeight: 600,
+              fontWeight: 700,
+              boxShadow: "0 4px 12px rgba(34,197,94,0.05)",
             }}>
               <span>{f.icon}</span> {f.text}
             </div>
@@ -186,13 +187,13 @@ export default function Landing() {
               height: "60px",
               borderRadius: "20px",
               fontSize: "16px",
-              fontWeight: 700,
+              fontWeight: 800,
               fontFamily: "inherit",
-              color: "#1a3a2a",
+              color: "white",
               border: "none",
               cursor: "pointer",
-              background: "white",
-              boxShadow: "0 12px 32px rgba(0,0,0,0.25), inset 0 -3px 0 rgba(0,0,0,0.1)",
+              background: "linear-gradient(135deg, #16a34a, #22c55e)",
+              boxShadow: "0 12px 32px rgba(22,163,74,0.3), inset 0 -3px 0 rgba(0,0,0,0.1)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -201,11 +202,11 @@ export default function Landing() {
             }}
             onMouseOver={(e) => {
               e.currentTarget.style.transform = "translateY(-2px)"
-              e.currentTarget.style.boxShadow = "0 16px 40px rgba(0,0,0,0.3), inset 0 -3px 0 rgba(0,0,0,0.1)"
+              e.currentTarget.style.boxShadow = "0 16px 40px rgba(22,163,74,0.4), inset 0 -3px 0 rgba(0,0,0,0.1)"
             }}
             onMouseOut={(e) => {
               e.currentTarget.style.transform = "none"
-              e.currentTarget.style.boxShadow = "0 12px 32px rgba(0,0,0,0.25), inset 0 -3px 0 rgba(0,0,0,0.1)"
+              e.currentTarget.style.boxShadow = "0 12px 32px rgba(22,163,74,0.3), inset 0 -3px 0 rgba(0,0,0,0.1)"
             }}
           >
             <span>Boshlash</span>
@@ -219,8 +220,9 @@ export default function Landing() {
         {/* Footer */}
         <p style={{
           fontSize: "12px",
-          color: "rgba(255,255,255,0.5)",
+          color: "#94a3b8",
           marginTop: "48px",
+          fontWeight: 500,
           animation: "fade-in 1s ease 0.8s both",
         }}>
           © 2025 Meal Time. Barcha huquqlar himoyalangan.
