@@ -2,66 +2,196 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 /* ═══════════════════════════════════════════
-   MOCK DATA
+   TYPES
+   ═══════════════════════════════════════════ */
+interface Meal {
+  id: number
+  name: string
+  price: number
+  calories: string
+  category: string
+  rating: number
+  time: string
+  image: string
+  fats: number
+  proteins: string
+  carbs: number
+  ingredients: string[]
+  description: string
+  vitamins: string[]
+}
+
+/* ═══════════════════════════════════════════
+   MENU DATA (from Mealtime images)
    ═══════════════════════════════════════════ */
 const categories = [
   { id: "all", label: "Barchasi", emoji: "🍽️" },
-  { id: "nonushta", label: "Nonushta", emoji: "🥣" },
-  { id: "tushlik", label: "Tushlik", emoji: "🍛" },
-  { id: "kechki", label: "Kechki ovqat", emoji: "🥗" },
+  { id: "salat", label: "Salatlar", emoji: "🥗" },
+  { id: "asosiy", label: "Asosiy taom", emoji: "🍛" },
+  { id: "choy", label: "Choylar", emoji: "🍵" },
   { id: "ichimlik", label: "Ichimliklar", emoji: "🥤" },
 ]
 
-const meals = [
+const meals: Meal[] = [
   {
-    id: 1, name: "Osh (Palov)", price: 32000, calories: 540, category: "tushlik", rating: 4.8, time: "30-40 min", image: "🍚",
-    fats: 25, proteins: 18, carbs: 60, ingredients: ["Guruch", "Go'sht", "Sabzi", "Piyoz", "Yog'"],
-    description: "An'anaviy o'zbek milliy taomi. Asosiy tarkibi darchin va zira bilan to'ldirilgan beqiyos maza."
+    id: 1,
+    name: "Achiq Chuchuk Salati",
+    price: 18000,
+    calories: "50 – 100",
+    category: "salat",
+    rating: 4.7,
+    time: "10 min",
+    image: "/images/achiq_chuchuk_salati.png",
+    fats: 2,
+    proteins: "1 – 2",
+    carbs: 8,
+    ingredients: ["Pomidor", "Piyoz", "Qalampir", "Ko'katlar", "Tuz", "Limon"],
+    description: "Yangi sabzavotlardan tayyorlangan achiq chuchuk salati. Vitaminlarga boy, yengil va tetik ta'mga ega. Har qanday asosiy taomga go'zal qo'shimcha.",
+    vitamins: ["Vitamin C (Pomidor, qalampir)", "Kapsaitsin (Qalampir)", "B-guruhi vitaminlari (Piyoz)"]
   },
   {
-    id: 2, name: "Qaymoqli sho'rva", price: 22000, calories: 320, category: "tushlik", rating: 4.6, time: "20-30 min", image: "🍲",
-    fats: 15, proteins: 12, carbs: 20, ingredients: ["Qaymoq", "Tovuq go'shti", "Qo'ziqorin", "Ko'katlar"],
-    description: "Yengil va mazali qaymoqli sho'rva. Ayniqsa sovuq kunlarda isinish uchun juda mos."
+    id: 2,
+    name: "Tuna va Kinoa Salati",
+    price: 42000,
+    calories: "200 – 250",
+    category: "salat",
+    rating: 4.9,
+    time: "15 min",
+    image: "/images/tuna_kinoa_salati.png",
+    fats: 8,
+    proteins: "28 – 30",
+    carbs: 22,
+    ingredients: ["Tuna", "Kinoa", "Ismaloq", "Pomidor", "Qalampir", "Zaytun", "Zaytun yog'i"],
+    description: "Oqsillarga boy premium salat. Tuna baliq felesi va kinoa donlari bilan tayyorlangan to'yimli va foydali taom. Sportchilar uchun ideal tanlov.",
+    vitamins: ["Vitamin A, C va E (Sabzavotlar va moy)", "Antioksidantlar", "Omega-3 (Tuna)"]
   },
   {
-    id: 3, name: "Tuxum va non", price: 15000, calories: 280, category: "nonushta", rating: 4.5, time: "10-15 min", image: "🍳",
-    fats: 18, proteins: 16, carbs: 25, ingredients: ["Tuxum", "Non", "Sariyog'", "Pishloq"],
-    description: "Erta tongdan kuchli energiya beruvchi oson va tez tayyorlanadigan nonushta."
+    id: 3,
+    name: "Go'shtli to'plar va Guruch",
+    price: 38000,
+    calories: "300 – 400",
+    category: "asosiy",
+    rating: 4.8,
+    time: "30-40 min",
+    image: "/images/goshtli_toplar.png",
+    fats: 18,
+    proteins: "22 – 30",
+    carbs: 45,
+    ingredients: ["Go'sht to'plari", "Qo'ziqorin", "Guruch", "Sabzavotlar", "Qalampir", "Ziravorlar"],
+    description: "Go'shtli to'plar qo'ziqorin sousi va rangli sabzavotlar bilan. Oq guruch bilan servis qilinadi. To'yimli va mazali asosiy taom.",
+    vitamins: ["Vitamin C (Sabzavotlar)", "Vitamin D (Qo'ziqorin)", "B-guruhi vitaminlari (Guruch)"]
   },
   {
-    id: 4, name: "Suli bo'tqasi", price: 18000, calories: 220, category: "nonushta", rating: 4.3, time: "15-20 min", image: "🥣",
-    fats: 6, proteins: 8, carbs: 40, ingredients: ["Suli yormasi", "Sut", "Asal", "Yong'oq", "Mevalar"],
-    description: "Sog'lom va to'yimli nonushta. Sutda pishirilgan toza suli bo'tqasi rezavorlar bilan."
+    id: 4,
+    name: "Green Blend Choy",
+    price: 15000,
+    calories: "120 – 150",
+    category: "choy",
+    rating: 4.6,
+    time: "5-7 min",
+    image: "/images/maxsus_choylar.png",
+    fats: 0,
+    proteins: "2 – 3",
+    carbs: 12,
+    ingredients: ["Ismaloq", "Olma", "Bodring", "Ko'k choy"],
+    description: "Mealtime maxsus yashil choy. Ismaloq va ko'k choy asosida tayyorlangan detoks ichimlik. Organizmni tozalash va kuchli antioksidant ta'siriga ega.",
+    vitamins: ["Vitamin C", "Vitamin A", "Vitamin K (Ismaloq, olma, bodring, ko'k choy)"]
   },
   {
-    id: 5, name: "Meva salati", price: 25000, calories: 180, category: "kechki", rating: 4.9, time: "10 min", image: "🥗",
-    fats: 2, proteins: 3, carbs: 35, ingredients: ["Olma", "Banan", "Kivi", "Qulupnay", "Asal", "Yalpiz"],
-    description: "Tabiiy vitaminlarga boy, shirin mevalarning ajoyib uyg'unlashgan to'plami."
+    id: 5,
+    name: "Red Fusion Choy",
+    price: 15000,
+    calories: "100 – 130",
+    category: "choy",
+    rating: 4.5,
+    time: "5-7 min",
+    image: "/images/maxsus_choylar.png",
+    fats: 0,
+    proteins: "1 – 2",
+    carbs: 10,
+    ingredients: ["Lavlagi", "Malina", "Zanjabil", "Hibiskus"],
+    description: "Mealtime maxsus qizil choy. Lavlagi va giyohlar asosida tayyorlangan antioksidantlarga boy ichimlik. Qon bosimini tartibga soladi.",
+    vitamins: ["Vitamin C", "Antioksidantlar (Lavlagi, malina, zanjabil, hibiskus)"]
   },
   {
-    id: 6, name: "Grillangan tovuq", price: 38000, calories: 420, category: "kechki", rating: 4.7, time: "25-35 min", image: "🍗",
-    fats: 22, proteins: 45, carbs: 5, ingredients: ["Tovuq felesi", "Ziravorlar", "Limon", "Zaytun yog'i"],
-    description: "Oqsillarga boy maxsus pishirilgan tovuq felesi. Sportchilar va dietadagilar uchun tavsiya etiladi."
+    id: 6,
+    name: "Golden Brew Choy",
+    price: 15000,
+    calories: "110 – 140",
+    category: "choy",
+    rating: 4.7,
+    time: "5-7 min",
+    image: "/images/maxsus_choylar.png",
+    fats: 0,
+    proteins: "1 – 2",
+    carbs: 11,
+    ingredients: ["Kurkuma", "Sabzi", "Apelsin", "Ziravorlar"],
+    description: "Mealtime maxsus oltin choy. Kurkuma va giyohlar asosida tayyorlangan yallig'lanishga qarshi ichimlik. Immunitetni mustahkamlaydi.",
+    vitamins: ["Vitamin C", "B-guruhi", "Kurkumin (Kurkuma, sabzi, apelsin, ziravorlar)"]
   },
   {
-    id: 7, name: "Yashil smoothie", price: 20000, calories: 150, category: "ichimlik", rating: 4.8, time: "5 min", image: "🥤",
-    fats: 1, proteins: 4, carbs: 28, ingredients: ["Ismaloq", "Olma", "Apelsin", "Zanjabil", "Kivi"],
-    description: "Organizm uchun ajoyib detoks ta'sirga ega, quvvat beruvchi vitaminli smuzis."
+    id: 7,
+    name: "Green Blend Ichimlik",
+    price: 22000,
+    calories: "120 – 150",
+    category: "ichimlik",
+    rating: 4.8,
+    time: "3-5 min",
+    image: "/images/maxsus_ichimliklar.png",
+    fats: 1,
+    proteins: "2 – 3",
+    carbs: 18,
+    ingredients: ["Ismaloq", "Olma", "Bodring"],
+    description: "Mealtime maxsus yashil ichimlik. Ismaloq asosida tayyorlangan sovuq pressli sharbat. Detoks va energiya berish uchun ideal.",
+    vitamins: ["Vitamin C", "Vitamin A", "Vitamin K (Ismaloq, olma, bodring)"]
   },
   {
-    id: 8, name: "Limonad", price: 12000, calories: 90, category: "ichimlik", rating: 4.4, time: "3 min", image: "🍋",
-    fats: 0, proteins: 0, carbs: 22, ingredients: ["Limon xaroti", "Yalpiz", "Muz", "Shakar qiyomi"],
-    description: "Chanqoqni bosuvchi maxsus yangi siqilgan limon sharbati yalpiz barglari bn."
+    id: 8,
+    name: "Red Fusion Ichimlik",
+    price: 22000,
+    calories: "100 – 130",
+    category: "ichimlik",
+    rating: 4.6,
+    time: "3-5 min",
+    image: "/images/maxsus_ichimliklar.png",
+    fats: 0,
+    proteins: "1 – 2",
+    carbs: 15,
+    ingredients: ["Lavlagi", "Malina", "Zanjabil"],
+    description: "Mealtime maxsus qizil ichimlik. Lavlagi asosida tayyorlangan sovuq pressli sharbat. Antioksidantlarga boy va yurak uchun foydali.",
+    vitamins: ["Vitamin C", "Antioksidantlar (Lavlagi, malina, zanjabil)"]
   },
   {
-    id: 9, name: "Lag'mon", price: 28000, calories: 480, category: "tushlik", rating: 4.7, time: "25-35 min", image: "🍜",
-    fats: 20, proteins: 15, carbs: 55, ingredients: ["Xamir", "Go'sht", "Sabzavotlar", "Xitoy karami"],
-    description: "Milliy uyg'ur uslubida pishirilgan maxsus cho'zma lag'mon sous bilan birlashgan."
+    id: 9,
+    name: "Golden Brew Ichimlik",
+    price: 22000,
+    calories: "110 – 140",
+    category: "ichimlik",
+    rating: 4.7,
+    time: "3-5 min",
+    image: "/images/maxsus_ichimliklar.png",
+    fats: 0,
+    proteins: "1 – 2",
+    carbs: 16,
+    ingredients: ["Kurkuma", "Sabzi", "Apelsin"],
+    description: "Mealtime maxsus oltin ichimlik. Kurkuma asosida tayyorlangan sovuq pressli sharbat. Yallig'lanishga qarshi va immunitetni oshiradi.",
+    vitamins: ["Vitamin C", "B-guruhi", "Kurkumin (Kurkuma, sabzi, apelsin)"]
   },
   {
-    id: 10, name: "Qovoqli tortilla", price: 24000, calories: 350, category: "kechki", rating: 4.5, time: "20 min", image: "🌮",
-    fats: 12, proteins: 10, carbs: 45, ingredients: ["Qovoq", "Tortilla", "Pishloq", "Ziravorlar"],
-    description: "Qovoq asosli yengil ishtahaochar maza va chiroyli kechki ovqat opsiyasi."
+    id: 10,
+    name: "Fit Salat Mix",
+    price: 28000,
+    calories: "120 – 180",
+    category: "salat",
+    rating: 4.8,
+    time: "10 min",
+    image: "/images/achiq_chuchuk_salati.png",
+    fats: 4,
+    proteins: "5 – 8",
+    carbs: 15,
+    ingredients: ["Aralash sabzavotlar", "Yong'oq", "Zaytun yog'i", "Limon", "Ko'katlar"],
+    description: "Fit-Taom kolleksiyasidan maxsus aralash sabzavot salati. Dietaga mos, vitamin va mineral moddalarga boy yengil taom.",
+    vitamins: ["Vitamin A", "Vitamin C", "Vitamin E", "Foliy kislotasi"]
   },
 ]
 
@@ -275,16 +405,20 @@ function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
               e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.08)"
             }}
           >
-            {/* Meal emoji / image */}
+            {/* Meal image */}
             <div style={{
               width: "88px", height: "88px",
               borderRadius: "20px",
-              background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+              overflow: "hidden",
               border: "1px solid rgba(34,197,94,0.1)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "44px", flexShrink: 0,
+              flexShrink: 0,
+              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
             }}>
-              {meal.image}
+              <img
+                src={meal.image}
+                alt={meal.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
             </div>
 
             {/* Content right */}
@@ -396,18 +530,20 @@ function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
             </button>
 
+            {/* Hero image */}
             <div style={{
-              textAlign: "center"
+              width: "100%", height: "220px", borderRadius: "24px",
+              overflow: "hidden", marginBottom: "20px",
+              boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
             }}>
-              <div style={{
-                width: "100px", height: "100px", borderRadius: "24px", margin: "0 auto 20px",
-                background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
-                display: "flex", alignItems: "center", justifyContent: "center", fontSize: "56px",
-                boxShadow: "0 8px 24px rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.2)",
-              }}>
-                {selectedMeal.image}
-              </div>
+              <img
+                src={selectedMeal.image}
+                alt={selectedMeal.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
 
+            <div style={{ textAlign: "center" }}>
               <h2 style={{ fontSize: "24px", fontWeight: 800, color: "#0f2618", textAlign: "center", marginBottom: "8px" }}>
                 {selectedMeal.name}
               </h2>
@@ -446,6 +582,33 @@ function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
                 ))}
               </div>
             </div>
+
+            {/* Vitaminlar */}
+            {selectedMeal.vitamins && selectedMeal.vitamins.length > 0 && (
+              <div style={{ marginBottom: "24px" }}>
+                <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#0f2618", marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span style={{ fontSize: "18px" }}>💊</span> Vitaminlar:
+                </h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  {selectedMeal.vitamins.map(vit => (
+                    <div key={vit} style={{
+                      display: "flex", alignItems: "center", gap: "10px",
+                      background: "rgba(34,197,94,0.06)", padding: "10px 14px",
+                      borderRadius: "14px", border: "1px solid rgba(34,197,94,0.1)",
+                    }}>
+                      <div style={{
+                        width: "8px", height: "8px", borderRadius: "50%",
+                        background: "linear-gradient(135deg, #16a34a, #22c55e)",
+                        flexShrink: 0,
+                      }} />
+                      <span style={{ fontSize: "13px", fontWeight: 600, color: "#2d5a3e", lineHeight: 1.4 }}>
+                        {vit}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(0,0,0,0.05)", paddingTop: "20px" }}>
               <div>
@@ -531,12 +694,16 @@ function CartTab({ cart, onRemove, onClear }: {
           }}>
             <div style={{
               width: "60px", height: "60px", borderRadius: "16px",
-              background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+              overflow: "hidden",
               border: "1px solid rgba(34,197,94,0.1)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "32px", flexShrink: 0,
+              flexShrink: 0,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
             }}>
-              {item.image}
+              <img
+                src={item.image}
+                alt={item.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <p style={{ fontSize: "15px", fontWeight: 700, color: "#1a3a2a" }}>{item.name}</p>
@@ -799,9 +966,9 @@ function ProfileTab({ onLogout, navigate }: { onLogout: () => void, navigate: an
                 e.currentTarget.style.boxShadow = "0 4px 16px rgba(34,197,94,0.04)"
               }}
             >
-              <div style={{ fontSize: "32px", width: "56px", height: "56px", background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)", borderRadius: "16px", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", border: "1px solid rgba(34,197,94,0.2)" }}>
-                {meal.image}
-                <div style={{ position: "absolute", top: "-6px", left: "-6px", width: "24px", height: "24px", borderRadius: "50%", background: "#16a34a", color: "white", fontSize: "12px", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid #ffffff", boxShadow: "0 2px 8px rgba(22,163,74,0.3)" }}>
+              <div style={{ width: "56px", height: "56px", borderRadius: "16px", overflow: "hidden", position: "relative", border: "1px solid rgba(34,197,94,0.2)", flexShrink: 0, boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
+                <img src={meal.image} alt={meal.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <div style={{ position: "absolute", top: "-4px", left: "-4px", width: "22px", height: "22px", borderRadius: "50%", background: "#16a34a", color: "white", fontSize: "11px", fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid #ffffff", boxShadow: "0 2px 8px rgba(22,163,74,0.3)" }}>
                   {index + 1}
                 </div>
               </div>
