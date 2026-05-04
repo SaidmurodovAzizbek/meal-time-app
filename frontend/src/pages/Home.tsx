@@ -35,7 +35,7 @@ const categories = [
 const meals: Meal[] = [
   {
     id: 1,
-    name: "Achiq Chuchuk Salati",
+    name: "Achiq-chuchuk Salati",
     price: 18000,
     calories: "50 – 100",
     category: "salat",
@@ -51,7 +51,7 @@ const meals: Meal[] = [
   },
   {
     id: 2,
-    name: "Tuna va Kinoa Salati",
+    name: "Premium Salati",
     price: 42000,
     calories: "200 – 250",
     category: "salat",
@@ -294,10 +294,9 @@ function formatPrice(n: number) {
 /* ═══════════════════════════════════════════
    MENU TAB
    ═══════════════════════════════════════════ */
-function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
+function MenuTab({ onAddToCart, onSelectMeal }: { onAddToCart: (id: number) => void; onSelectMeal: (meal: Meal) => void }) {
   const [activeCategory, setActiveCategory] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedMeal, setSelectedMeal] = useState<typeof meals[0] | null>(null)
 
   const filtered = meals.filter((m) => {
     const matchCat = activeCategory === "all" || m.category === activeCategory
@@ -383,7 +382,7 @@ function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
         {filtered.map((meal) => (
           <div
             key={meal.id}
-            onClick={() => setSelectedMeal(meal)}
+            onClick={() => onSelectMeal(meal)}
             style={{
               background: "#fcfbfa",
               borderRadius: "24px",
@@ -497,140 +496,6 @@ function MenuTab({ onAddToCart }: { onAddToCart: (id: number) => void }) {
           <p style={{ fontSize: "14px", color: "#6b8f7b", marginTop: "6px" }}>
             Boshqa so'z bilan izlab ko'ring
           </p>
-        </div>
-      )}
-
-      {/* Modal */}
-      {selectedMeal && (
-        <div style={{
-          position: "fixed", inset: 0, zIndex: 100,
-          background: "rgba(15, 38, 24, 0.4)", backdropFilter: "blur(8px)",
-          display: "flex", alignItems: "center", justifyContent: "center", padding: "20px",
-          animation: "fade-in 0.2s ease",
-        }} onClick={() => setSelectedMeal(null)}>
-          <div style={{
-            background: "#fff", borderRadius: "32px", padding: "24px",
-            width: "100%", maxWidth: "420px", maxHeight: "90vh", overflowY: "auto",
-            boxShadow: "0 24px 64px rgba(0,0,0,0.2)",
-            animation: "slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-            position: "relative",
-          }} onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => setSelectedMeal(null)}
-              style={{
-                position: "absolute", top: "16px", right: "16px",
-                width: "36px", height: "36px", borderRadius: "12px",
-                background: "rgba(0,0,0,0.05)", border: "none", cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                color: "#1a3a2a", transition: "background 0.2s", zIndex: 2
-              }}
-              onMouseOver={(e) => e.currentTarget.style.background = "rgba(0,0,0,0.1)"}
-              onMouseOut={(e) => e.currentTarget.style.background = "rgba(0,0,0,0.05)"}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-            </button>
-
-            {/* Hero image */}
-            <div style={{
-              width: "100%", height: "220px", borderRadius: "24px",
-              overflow: "hidden", marginBottom: "20px",
-              boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-            }}>
-              <img
-                src={selectedMeal.image}
-                alt={selectedMeal.name}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </div>
-
-            <div style={{ textAlign: "center" }}>
-              <h2 style={{ fontSize: "24px", fontWeight: 800, color: "#0f2618", textAlign: "center", marginBottom: "8px" }}>
-                {selectedMeal.name}
-              </h2>
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
-                <span style={{ fontSize: "14px", fontWeight: 700, color: "#fbbf24", display: "flex", alignItems: "center", gap: "4px" }}><StarIcon /> {selectedMeal.rating} ({(selectedMeal.id * 123) % 400 + 40} baho)</span>
-                <span style={{ opacity: 0.3 }}>•</span>
-                <span style={{ fontSize: "14px", fontWeight: 600, color: "#6b8f7b", display: "flex", alignItems: "center", gap: "4px" }}><ClockIcon /> {selectedMeal.time}</span>
-              </div>
-
-              <p style={{ fontSize: "14px", color: "#4b6b55", textAlign: "center", lineHeight: 1.5, marginBottom: "24px" }}>
-                {selectedMeal.description}
-              </p>
-            </div>
-
-            <div style={{ display: "flex", justifyContent: "space-between", gap: "8px", marginBottom: "24px" }}>
-              {[
-                { label: "Kaloriya", val: selectedMeal.calories, unit: "kcal" },
-                { label: "Oqsillar", val: selectedMeal.proteins, unit: "g" },
-                { label: "Yog'lar", val: selectedMeal.fats, unit: "g" },
-                { label: "Uglevod", val: selectedMeal.carbs, unit: "g" },
-              ].map(mac => (
-                <div key={mac.label} style={{ textAlign: "center", flex: 1, background: "rgba(34,197,94,0.05)", borderRadius: "16px", padding: "10px 4px" }}>
-                  <p style={{ fontSize: "14px", fontWeight: 800, color: "#16a34a" }}>{mac.val}<span style={{ fontSize: "10px", marginLeft: "2px" }}>{mac.unit}</span></p>
-                  <p style={{ fontSize: "11px", fontWeight: 600, color: "#6b8f7b", marginTop: "2px" }}>{mac.label}</p>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ marginBottom: "24px" }}>
-              <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#0f2618", marginBottom: "12px" }}>Tarkibidagi masalliqlar:</h3>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                {selectedMeal.ingredients?.map(ing => (
-                  <span key={ing} style={{ background: "#f3f4f6", padding: "6px 14px", borderRadius: "100px", fontSize: "13px", fontWeight: 600, color: "#4b5563" }}>
-                    {ing}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Vitaminlar */}
-            {selectedMeal.vitamins && selectedMeal.vitamins.length > 0 && (
-              <div style={{ marginBottom: "24px" }}>
-                <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#0f2618", marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ fontSize: "18px" }}>💊</span> Vitaminlar:
-                </h3>
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                  {selectedMeal.vitamins.map(vit => (
-                    <div key={vit} style={{
-                      display: "flex", alignItems: "center", gap: "10px",
-                      background: "rgba(34,197,94,0.06)", padding: "10px 14px",
-                      borderRadius: "14px", border: "1px solid rgba(34,197,94,0.1)",
-                    }}>
-                      <div style={{
-                        width: "8px", height: "8px", borderRadius: "50%",
-                        background: "linear-gradient(135deg, #16a34a, #22c55e)",
-                        flexShrink: 0,
-                      }} />
-                      <span style={{ fontSize: "13px", fontWeight: 600, color: "#2d5a3e", lineHeight: 1.4 }}>
-                        {vit}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(0,0,0,0.05)", paddingTop: "20px" }}>
-              <div>
-                <p style={{ fontSize: "12px", color: "#6b8f7b", fontWeight: 600, marginBottom: "2px" }}>Umumiy narx</p>
-                <span style={{ fontSize: "22px", fontWeight: 800, color: "#0f2618" }}>
-                  {formatPrice(selectedMeal.price)}
-                </span>
-              </div>
-              <button
-                onClick={() => { onAddToCart(selectedMeal.id); setSelectedMeal(null) }}
-                style={{
-                  background: "#16a34a", color: "white", border: "none", padding: "14px 24px",
-                  borderRadius: "16px", fontSize: "14px", fontWeight: 800, cursor: "pointer",
-                  boxShadow: "0 8px 24px rgba(22,163,74,0.25)", transition: "transform 0.15s"
-                }}
-                onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-                onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-              >
-                Savatga qo'shish
-              </button>
-            </div>
-          </div>
         </div>
       )}
     </div>
@@ -805,9 +670,158 @@ function CartTab({ cart, onRemove, onClear }: {
 }
 
 /* ═══════════════════════════════════════════
+   MEAL DETAIL MODAL (shared)
+   ═══════════════════════════════════════════ */
+function MealDetailModal({ meal, onClose, onAddToCart }: { meal: Meal; onClose: () => void; onAddToCart?: (id: number) => void }) {
+  return (
+    <div style={{
+      position: "fixed", inset: 0, zIndex: 9999,
+      background: "rgba(15, 38, 24, 0.5)", backdropFilter: "blur(12px)",
+      display: "flex", alignItems: "center", justifyContent: "center", padding: "20px",
+      animation: "fade-in 0.2s ease",
+    }} onClick={onClose}>
+      <div style={{
+        background: "#fff", borderRadius: "32px", padding: "24px",
+        width: "100%", maxWidth: "420px", maxHeight: "90vh", overflowY: "auto",
+        boxShadow: "0 24px 64px rgba(0,0,0,0.2)",
+        animation: "slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+        position: "relative",
+      }} onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute", top: "16px", right: "16px",
+            width: "36px", height: "36px", borderRadius: "12px",
+            background: "rgba(255,255,255,0.85)", border: "none", cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            color: "#1a3a2a", transition: "background 0.2s", zIndex: 2,
+            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+          }}
+          onMouseOver={(e) => e.currentTarget.style.background = "rgba(255,255,255,1)"}
+          onMouseOut={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.85)"}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+        </button>
+
+        {/* Hero image */}
+        <div style={{
+          width: "100%", height: "220px", borderRadius: "24px",
+          overflow: "hidden", marginBottom: "20px",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+        }}>
+          <img src={meal.image} alt={meal.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        </div>
+
+        <div style={{ textAlign: "center" }}>
+          <h2 style={{ fontSize: "24px", fontWeight: 800, color: "#0f2618", textAlign: "center", marginBottom: "8px" }}>
+            {meal.name}
+          </h2>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+            <span style={{ fontSize: "14px", fontWeight: 700, color: "#fbbf24", display: "flex", alignItems: "center", gap: "4px" }}><StarIcon /> {meal.rating} ({(meal.id * 123) % 400 + 40} baho)</span>
+            <span style={{ opacity: 0.3 }}>•</span>
+            <span style={{ fontSize: "14px", fontWeight: 600, color: "#6b8f7b", display: "flex", alignItems: "center", gap: "4px" }}><ClockIcon /> {meal.time}</span>
+          </div>
+          <p style={{ fontSize: "14px", color: "#4b6b55", textAlign: "center", lineHeight: 1.5, marginBottom: "24px" }}>
+            {meal.description}
+          </p>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "space-between", gap: "8px", marginBottom: "24px" }}>
+          {[
+            { label: "Kaloriya", val: meal.calories, unit: "kcal" },
+            { label: "Oqsillar", val: meal.proteins, unit: "g" },
+            { label: "Yog'lar", val: meal.fats, unit: "g" },
+            { label: "Uglevod", val: meal.carbs, unit: "g" },
+          ].map(mac => (
+            <div key={mac.label} style={{ textAlign: "center", flex: 1, background: "rgba(34,197,94,0.05)", borderRadius: "16px", padding: "10px 4px" }}>
+              <p style={{ fontSize: "14px", fontWeight: 800, color: "#16a34a" }}>{mac.val}<span style={{ fontSize: "10px", marginLeft: "2px" }}>{mac.unit}</span></p>
+              <p style={{ fontSize: "11px", fontWeight: 600, color: "#6b8f7b", marginTop: "2px" }}>{mac.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginBottom: "24px" }}>
+          <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#0f2618", marginBottom: "12px" }}>Tarkibidagi masalliqlar:</h3>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+            {meal.ingredients?.map(ing => (
+              <span key={ing} style={{ background: "#f3f4f6", padding: "6px 14px", borderRadius: "100px", fontSize: "13px", fontWeight: 600, color: "#4b5563" }}>
+                {ing}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Vitaminlar */}
+        {meal.vitamins && meal.vitamins.length > 0 && (
+          <div style={{ marginBottom: "24px" }}>
+            <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#0f2618", marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ fontSize: "18px" }}>💊</span> Vitaminlar:
+            </h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              {meal.vitamins.map(vit => (
+                <div key={vit} style={{
+                  display: "flex", alignItems: "center", gap: "10px",
+                  background: "rgba(34,197,94,0.06)", padding: "10px 14px",
+                  borderRadius: "14px", border: "1px solid rgba(34,197,94,0.1)",
+                }}>
+                  <div style={{
+                    width: "8px", height: "8px", borderRadius: "50%",
+                    background: "linear-gradient(135deg, #16a34a, #22c55e)",
+                    flexShrink: 0,
+                  }} />
+                  <span style={{ fontSize: "13px", fontWeight: 600, color: "#2d5a3e", lineHeight: 1.4 }}>
+                    {vit}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(0,0,0,0.05)", paddingTop: "20px" }}>
+          <div>
+            <p style={{ fontSize: "12px", color: "#6b8f7b", fontWeight: 600, marginBottom: "2px" }}>Umumiy narx</p>
+            <span style={{ fontSize: "22px", fontWeight: 800, color: "#0f2618" }}>
+              {formatPrice(meal.price)}
+            </span>
+          </div>
+          {onAddToCart ? (
+            <button
+              onClick={() => { onAddToCart(meal.id); onClose() }}
+              style={{
+                background: "#16a34a", color: "white", border: "none", padding: "14px 24px",
+                borderRadius: "16px", fontSize: "14px", fontWeight: 800, cursor: "pointer",
+                boxShadow: "0 8px 24px rgba(22,163,74,0.25)", transition: "transform 0.15s"
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
+              Savatga qo'shish
+            </button>
+          ) : (
+            <button
+              onClick={onClose}
+              style={{
+                background: "rgba(34,197,94,0.1)", color: "#16a34a", border: "1px solid rgba(34,197,94,0.2)",
+                padding: "14px 24px", borderRadius: "16px", fontSize: "14px", fontWeight: 800,
+                cursor: "pointer", transition: "transform 0.15s"
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
+              Yopish
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════
    PROFILE TAB
    ═══════════════════════════════════════════ */
-function ProfileTab({ onLogout, navigate }: { onLogout: () => void, navigate: any }) {
+function ProfileTab({ onLogout, navigate, onSelectMeal }: { onLogout: () => void, navigate: any, onSelectMeal: (meal: Meal) => void }) {
   const menuItems = [
     { icon: "👤", label: "Shaxsiy ma'lumotlar", color: "#16a34a", path: "/profile/info" },
     { icon: "📜", label: "Buyurtmalar tarixi", color: "#f59e0b", path: "/profile/history" },
@@ -951,7 +965,7 @@ function ProfileTab({ onLogout, navigate }: { onLogout: () => void, navigate: an
 
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           {topMeals.map((meal, index) => (
-            <div key={meal.id} style={{
+            <div key={meal.id} onClick={() => onSelectMeal(meal)} style={{
               display: "flex", alignItems: "center", gap: "16px", padding: "16px",
               background: "rgba(255,255,255,0.9)", borderRadius: "20px",
               border: "1px solid rgba(255,255,255,1)", transition: "transform 0.2s ease, box-shadow 0.2s ease", cursor: "pointer",
@@ -997,10 +1011,22 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"menu" | "cart" | "profile">("menu")
   const [cart, setCart] = useState<{ id: number; qty: number }[]>([])
   const [greeting, setGreeting] = useState("")
+  const [menuSelectedMeal, setMenuSelectedMeal] = useState<Meal | null>(null)
+  const [profileSelectedMeal, setProfileSelectedMeal] = useState<Meal | null>(null)
+
+  // Computed: is any modal open?
+  const isModalOpen = menuSelectedMeal !== null || profileSelectedMeal !== null
 
   useEffect(() => {
     const token = localStorage.getItem("token")
     if (!token) { navigate("/"); return }
+
+    // Check URL for tab param (used by profile sub-pages back button)
+    const params = new URLSearchParams(window.location.search)
+    const tabParam = params.get("tab")
+    if (tabParam === "profile" || tabParam === "cart" || tabParam === "menu") {
+      setActiveTab(tabParam)
+    }
 
     const h = new Date().getHours()
     if (h < 6) setGreeting("Xayrli tun")
@@ -1072,7 +1098,7 @@ export default function Home() {
         borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
         position: "sticky",
         top: 0,
-        zIndex: 50,
+        zIndex: isModalOpen ? 1 : 50,
         boxShadow: "0 4px 24px rgba(0,0,0,0.1)",
       }}>
         <div style={{
@@ -1136,9 +1162,10 @@ export default function Home() {
         position: "relative",
         zIndex: 1,
       }}>
-        {activeTab === "menu" && <MenuTab onAddToCart={handleAddToCart} />}
+        {activeTab === "menu" && <MenuTab onAddToCart={handleAddToCart} onSelectMeal={(meal) => setMenuSelectedMeal(meal)} />}
         {activeTab === "cart" && <CartTab cart={cart} onRemove={handleRemoveFromCart} onClear={handleClearCart} />}
-        {activeTab === "profile" && <ProfileTab onLogout={() => navigate("/")} navigate={navigate} />}
+        {activeTab === "profile" && <ProfileTab onLogout={() => navigate("/")} navigate={navigate} onSelectMeal={(meal) => setProfileSelectedMeal(meal)} />}
+
       </main>
 
       {/* ─── Bottom Tab Bar ─── */}
@@ -1151,7 +1178,7 @@ export default function Home() {
         backdropFilter: "blur(24px)",
         borderTop: "1px solid rgba(255, 255, 255, 1)",
         padding: "12px 0 env(safe-area-inset-bottom, 12px)",
-        zIndex: 50,
+        zIndex: isModalOpen ? 1 : 50,
         boxShadow: "0 -4px 32px rgba(34,197,94,0.06)",
       }}>
         <div style={{
@@ -1196,6 +1223,21 @@ export default function Home() {
           })}
         </div>
       </nav>
+
+      {/* ─── Global Modals (rendered outside header/main/footer stacking context) ─── */}
+      {menuSelectedMeal && (
+        <MealDetailModal
+          meal={menuSelectedMeal}
+          onClose={() => setMenuSelectedMeal(null)}
+          onAddToCart={(id) => { handleAddToCart(id); setMenuSelectedMeal(null) }}
+        />
+      )}
+      {profileSelectedMeal && (
+        <MealDetailModal
+          meal={profileSelectedMeal}
+          onClose={() => setProfileSelectedMeal(null)}
+        />
+      )}
     </div>
   )
 }
